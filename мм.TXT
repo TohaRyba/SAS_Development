@@ -1,0 +1,479 @@
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+void gen();
+void rabota();
+
+struct date
+{
+     int day;
+     int month;
+     int year;
+};
+
+vector<date> Dr;
+vector<date> Ds;
+
+int main()
+{
+   int t=-1;
+   while (t!=0)
+   {
+       cout<<"If you want to generate random dignosis and screening data insert '1', to quit insert '0': ";
+       cin>>t;
+       if (t==0) return 0;
+       if (t==1)
+       {
+           gen();
+           cout<<endl<<endl;
+           rabota();
+           Dr.clear();
+           Ds.clear();
+       }
+       else
+       {
+           cout<<"Wrong input!"<<endl;
+       }
+   }
+   return 0;
+}
+
+void gen()
+{
+    cout<<endl;
+    for (int i=0; i<40; i++)
+    {
+        date dr;
+        dr.year = rand() % 5 + 2017;
+        dr.month = rand() % 13;
+        dr.day = rand() % 5 + 27;
+        Dr.push_back(dr);
+    }
+    for (int i=0; i<Dr.size(); i++)
+    {
+        if (Dr[i].year == 2017)
+        {
+            Dr[i].year=0;
+            Dr[i].month = 0;
+            Dr[i].day = 0;
+            continue;
+        }
+        if (Dr[i].month == 0)
+        {
+            Dr[i].day = 0;
+            continue;
+        }
+        if (Dr[i].month == 1)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 3)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 5)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 7)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 8)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 10)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 12)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 32;
+                continue;
+            }
+        }
+        if (Dr[i].month == 2)
+        {
+            if (Dr[i].year == 2020)
+            {
+                Dr[i].day = rand() % 30;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 29;
+                continue;
+            }
+
+        }
+        if (Dr[i].month == 4)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 31;
+                continue;
+            }
+        }
+        if (Dr[i].month == 6)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 31;
+                continue;
+            }
+        }
+        if (Dr[i].month == 9)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 31;
+                continue;
+            }
+        }
+        if (Dr[i].month == 11)
+        {
+            if ( rand() % 3 == 0)
+            {
+                Dr[i].day = 0;
+                continue;
+            }
+            else
+            {
+                Dr[i].day = rand() % 31;
+                continue;
+            }
+        }
+    }
+    /////////////// creation of Ds
+    for (int i=0; i<Dr.size(); i++)
+    {
+        date ds;
+        if (Dr[i].year != 0 && Dr[i].month != 0 && Dr[i].day != 0)
+        {
+            ds.year = Dr[i].year;
+            if (rand() % 2 ==0 && Dr[i].month != 1)
+            {
+                ds.month = Dr[i].month-1;
+            }
+            else
+            {
+                ds.month = Dr[i].month;
+            }
+            ds.day = rand() % 28 +1;
+            Ds.push_back(ds);
+            continue;
+        }
+        if (Dr[i].year == 0)
+        {
+            ds.year = rand() % 5 + 2017;
+            ds.month = rand() % 12 + 1;
+            ds.day = rand() % 28 + 1;
+            Ds.push_back(ds);
+            continue;
+        }
+        if (Dr[i].month == 0)
+        {
+            if (rand() % 2 == 0)
+            {
+                ds.year = Dr[i].year - 1;
+            }
+            else
+            {
+                ds.year = Dr[i].year;
+            }
+            ds.month = rand() % 12 + 1;
+            ds.day = rand() % 28 + 1;
+            Ds.push_back(ds);
+            continue;
+        }
+        if (Dr[i].day == 0)
+        {
+            ds.year = Dr[i].year;
+            if (rand() % 2 == 0)
+            {
+                ds.month = Dr[i].month - 1;
+            }
+            else
+            {
+                ds.month = Dr[i].month;
+            }
+            ds.day = rand() % 28 + 1;
+            Ds.push_back(ds);
+            continue;
+        }
+    }
+    ///////////////  show random Dr
+    cout<<"Diagnosis date:"<<"          "<<"Screening date:"<<endl;
+    for (int i=0; i<Dr.size(); i++)
+    {
+        if (Dr[i].year == 0)
+        {
+            cout<<"xxxx-xx-xx"<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+            continue;
+        }
+        if (Dr[i].month == 0)
+        {
+            cout<<Dr[i].year<<"-xx-xx"<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+            continue;
+        }
+        if (Dr[i].day == 0)
+        {
+            if (Dr[i].month < 10)
+            {
+                cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-xx"<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                continue;
+            }
+            else
+            {
+                cout<<Dr[i].year<<"-"<<Dr[i].month<<"-xx"<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                continue;
+            }
+        }
+        else
+        {
+            if (Dr[i].month < 10)
+            {
+                if (Dr[i].day < 10)
+                {
+                    cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-0"<<Dr[i].day<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+                else
+                {
+                    cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-"<<Dr[i].day<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+
+            }
+            else
+            {
+                if (Dr[i].day < 10)
+                {
+                    cout<<Dr[i].year<<"-"<<Dr[i].month<<"-0"<<Dr[i].day<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+                else
+                {
+                    cout<<Dr[i].year<<"-"<<Dr[i].month<<"-"<<Dr[i].day<<"               "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+            }
+
+        }
+    }
+    ///////////////
+}
+
+void rabota()
+{
+    cout<<"The result of the program: "<<endl<<endl;
+    cout<<"Diagnosis date:"<<"          "<<"Screening date:"<<endl;
+    for (int i=0; i<Dr.size(); i++)
+    {
+        if (Dr[i].year != 0 && Dr[i].month != 0 && Dr[i].day != 0)
+        {
+            if (Dr[i].month < 10)
+            {
+                if (Dr[i].day < 10)
+                {
+                    cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-0"<<Dr[i].day<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+                else
+                {
+                    cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-"<<Dr[i].day<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+
+            }
+            else
+            {
+                if (Dr[i].day < 10)
+                {
+                    cout<<Dr[i].year<<"-"<<Dr[i].month<<"-0"<<Dr[i].day<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+                else
+                {
+                    cout<<Dr[i].year<<"-"<<Dr[i].month<<"-"<<Dr[i].day<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+            }
+        }
+        if (Dr[i].year != 0 && Dr[i].month != 0 && Dr[i].day == 0)
+        {
+            if (Ds[i].year == Dr[i].year && Ds[i].month == Dr[i].month)
+            {
+               Dr[i].day = Ds[i].day;
+               if (Dr[i].month < 10)
+               {
+                   if (Dr[i].day < 10)
+                   {
+                       cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-0"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                       continue;
+                   }
+                   else
+                   {
+                       cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                       continue;
+                   }
+
+               }
+               else
+               {
+                   if (Dr[i].day < 10)
+                   {
+                       cout<<Dr[i].year<<"-"<<Dr[i].month<<"-0"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                       continue;
+                   }
+                   else
+                   {
+                       cout<<Dr[i].year<<"-"<<Dr[i].month<<"-"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                       continue;
+                   }
+               }
+            }
+            else
+            {
+                if (Dr[i].month < 10)
+                {
+                    cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-xx"<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+                else
+                {
+                    cout<<Dr[i].year<<"-"<<Dr[i].month<<"-xx"<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                    continue;
+                }
+            }
+        }
+
+        if (Dr[i].year != 0 && Dr[i].month == 0)
+        {
+            if (Ds[i].year == Dr[i].year)
+            {
+                Dr[i].day = Ds[i].day;
+                Dr[i].month = Ds[i].month;
+                if (Dr[i].month < 10)
+                {
+                    if (Dr[i].day < 10)
+                    {
+                        cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-0"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                        continue;
+                    }
+                    else
+                    {
+                        cout<<Dr[i].year<<"-0"<<Dr[i].month<<"-"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                        continue;
+                    }
+
+                }
+                else
+                {
+                    if (Dr[i].day < 10)
+                    {
+                        cout<<Dr[i].year<<"-"<<Dr[i].month<<"-0"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                        continue;
+                    }
+                    else
+                    {
+                        cout<<Dr[i].year<<"-"<<Dr[i].month<<"-"<<Dr[i].day<<"  changed      "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                cout<<Dr[i].year<<"-xx-xx"<<"  unchanged    "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+                continue;
+            }
+        }
+        if (Dr[i].year == 0)
+        {
+            cout<<"xxxx-xx-xx"<<"  no replace   "<<Ds[i].year<<"-"<<Ds[i].month<<"-"<<Ds[i].day<<endl;
+            continue;
+        }
+    }
+    cout<<endl<<endl;
+}
